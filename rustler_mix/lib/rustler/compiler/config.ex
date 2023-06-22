@@ -72,7 +72,8 @@ defmodule Rustler.Compiler.Config do
     "#{crate_path}/**/*"
     |> Path.wildcard()
     |> Enum.reject(fn path ->
-      String.starts_with?(path, "#{crate_path}/target/")
+      String.starts_with?(path, "#{crate_path}/target/") or
+        File.dir?(path)
     end)
   end
 
